@@ -13,8 +13,8 @@ public class InputHandler {
 
     /**
      * Получает число от пользователя в указанной системе счисления
-     * @param radix система счисления (2, 8, 10, 16)
-     * @return введенное число
+     * param radix система счисления (2, 8, 10, 16)
+     * return введенное число
      */
     public int getNumber(int radix) {
         while (true) {
@@ -30,7 +30,7 @@ public class InputHandler {
 
     /**
      * Получает арифметическую операцию от пользователя
-     * @return символ операции (+, -, *, /)
+     * return символ операции (+, -, *, /)
      */
     public char getOperation() {
         System.out.print("Введите знак операции (+, -, *, /): ");
@@ -48,7 +48,7 @@ public class InputHandler {
         }
     }
 
-    /**
+     /**
      * Закрывает Scanner (вызывать при завершении работы)
      */
     public void close() {
