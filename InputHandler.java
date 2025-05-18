@@ -16,30 +16,22 @@ public class InputHandler {
      * param radix система счисления (2, 8, 10, 16)
      * return введенное число
      */
-    
-    public void getResult() {
+    public int getNumber(int radix) {
+        while (true) {
+            System.out.print("Введите число: ");
+            String input = scanner.nextLine().trim(); // Изменили на nextLine()
+
             try {
-                InputHandler handler = new InputHandler(scanner);
-                System.out.print("Введите систему счисления (2/8/10/16): ");
-                int radix = Integer.parseInt(scanner.nextLine());
-        
-                int a = handler.getNumber(radix, "Введите первое число: ");
-                String sign = handler.getSign("Введите знак операции (+ - * /): ");
-                int b = handler.getNumber(radix, "Введите второе число: ");
-        
-                int result = solve(a, b, sign);
-        
-                System.out.println("Результат:");
-                System.out.println("2: " + Integer.toBinaryString(result));
-                System.out.println("8: " + Integer.toOctalString(result));
-                System.out.println("10: " + result);
-                System.out.println("16: " + Integer.toHexString(result));
-            } 
-            catch (Exception e) 
-            {
-                System.out.println("Ошибка при выполнении операции: " + e.getMessage());
+                if (isValidForRadix(input, radix)) {
+                    return Integer.parseInt(input, radix);
+                } else {
+                    System.out.println("Ошибка: число содержит недопустимые символы для " + radix + "-ной системы!");
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("Ошибка: введите корректное число!");
             }
-    }    
+        }
+    }
 
     private boolean isValidForRadix(String number, int radix) {
         String validChars;
