@@ -29,7 +29,6 @@ public class Menu {
                     break;
                 case "2":
                     try {
-                        System.out.println( currentBase.getRadix());
                         calc.getResult();
                     } catch (Exception e) {
                         throw new RuntimeException(e);

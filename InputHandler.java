@@ -19,10 +19,9 @@ public class InputHandler {
     public int getNumber(int radix) {
         while (true) {
             System.out.print("Введите число: ");
-            String input = scanner.next();
+            String input = scanner.nextLine().trim(); // Изменили на nextLine()
 
             try {
-                // Проверяем допустимость символов для текущей системы счисления
                 if (isValidForRadix(input, radix)) {
                     return Integer.parseInt(input, radix);
                 } else {
@@ -67,10 +66,10 @@ public class InputHandler {
      * return символ операции (+, -, *, /)
      */
     public char getOperation() {
-        System.out.print("Введите знак операции (+, -, *, /): ");
-
         while (true) {
-            String input = scanner.next();
+            System.out.print("Введите знак операции (+, -, *, /): ");
+            String input = scanner.nextLine().trim(); // Изменили на nextLine()
+
             if (input.length() == 1) {
                 char operator = input.charAt(0);
                 if (operator == '+' || operator == '-' || operator == '*' || operator == '/') {
@@ -78,7 +77,6 @@ public class InputHandler {
                 }
             }
             System.out.println("Ошибка: введите один из допустимых знаков (+, -, *, /)");
-            System.out.print("Попробуйте снова: ");
         }
     }
 
