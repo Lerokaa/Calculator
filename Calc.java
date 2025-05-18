@@ -1,6 +1,4 @@
 public class Calc {
-    Menu menu;
-    int system;
     int number1;
     int number2;
     char sign;
@@ -8,23 +6,17 @@ public class Calc {
 
 
     public Calc() {
-        menu = new Menu();
+        
     }
 
-    public void  showMenu() throws Exception{
-        System.out.println("Выберите систему счисления ");
-        this.setSystem(menu.showMenu());
-    }
-
-    private void setSystem(int system){
-        this.system = system;
-    }
+    InputHandler ih = new InputHandler();
+    Base cBase = new Base();
 
     private void getStatement(){
         System.out.println("Введите 2 числа");
-        this.number1 = menu.getNumber(system);
-        this.sign = menu.getSign();
-        this.number2 = menu.getNumber(system);
+        this.number1 = ih.getNumber(cBase.getRadix());
+        this.sign = ih.getSign();
+        this.number2 = ih.getNumber(cBase.getRadix());
     }
 
     private int Solve() throws Exception{
