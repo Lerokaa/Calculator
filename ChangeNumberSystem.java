@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-class NumberSystemChanger {
+class  ChangeNumberSystem
+{
     private static Scanner scanner = new Scanner(System.in);
 
     public static int changeNumberSystem(int currentBase) {
@@ -23,4 +24,7 @@ class NumberSystemChanger {
         // Если что-то пошло не так, возвращаем старую систему счисления
         return currentBase;
     }
+
+    private ChangeNumberSystem()
+    {}
 }
