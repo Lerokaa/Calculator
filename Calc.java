@@ -1,21 +1,23 @@
+import java.util.Scanner;
+
 public class Calc {
     int number1;
     int number2;
     char sign;
     int result;
 
+    private InputHandler ih;
+    private Base cBase;
 
-    public Calc() {
-        
+    public Calc(Scanner scanner, Base base) {
+        this.ih = new InputHandler(scanner);
+        this.cBase = base;
     }
-
-    InputHandler ih = new InputHandler();
-    Base cBase = new Base();
 
     private void getStatement(){
         System.out.println("Введите 2 числа");
         this.number1 = ih.getNumber(cBase.getRadix());
-        this.sign = ih.getSign();
+        this.sign = ih.getOperation();
         this.number2 = ih.getNumber(cBase.getRadix());
     }
 
@@ -50,11 +52,8 @@ public class Calc {
         String resultO = Integer.toOctalString(result);
         String resultH = Integer.toHexString(result);
 
+        System.out.println("Результат выполнения:");
         System.out.println("Bin: " + resultB + "  Oct: "+resultO + "  Dec: " + result + "  Hex: " + resultH);
     }
-
-
-
-
 
 }

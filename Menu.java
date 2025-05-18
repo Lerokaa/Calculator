@@ -2,12 +2,19 @@ import java.util.Scanner;
 
 public class Menu {
 
-    Scanner scanner = new Scanner(System.in);
-    Base currentBase = new Base();
+    private Scanner scanner;
+    private Base currentBase;
+    private Calc calc;
+
+    public Menu() {
+        this.scanner = new Scanner(System.in);
+        this.currentBase = new Base(scanner);
+        this.calc = new Calc(scanner, currentBase);
+    }
 
     public void showMenu()
     {
-        System.out.println("Инженерный калькулятор");
+        System.out.println("Калькулятор");
         System.out.println("Поддерживаемые системы счисления: 2, 8, 10, 16");
         System.out.println("Текущая система счисления: " + currentBase.getRadix());
 
@@ -18,10 +25,15 @@ public class Menu {
 
             switch (choice) {
                 case "1":
-                    enterRadix();
+                    currentBase.enterRadix();
                     break;
                 case "2":
-                    // performCalculation();
+                    try {
+                        System.out.println( currentBase.getRadix());
+                        calc.getResult();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case "3":
                     System.out.println("Выход из калькулятора.");
@@ -33,24 +45,7 @@ public class Menu {
         }
     }
 
-    private void enterRadix()
-    {
-        while (true) {
-            System.out.print("Введите систему счисления (2, 8, 10, 16): ");
-            String input = scanner.nextLine().trim();
 
-            try {
-                int newRadix = Integer.parseInt(input);
-                currentBase.setRadix(newRadix);
-                System.out.println("Система счисления изменена на " + currentBase.getRadix());
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введите целое число");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
 
 
     public void printMenu() {

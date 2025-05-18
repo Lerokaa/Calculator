@@ -7,8 +7,8 @@ import java.util.InputMismatchException;
 public class InputHandler {
     private Scanner scanner;
 
-    public InputHandler() {
-        this.scanner = new Scanner(System.in);
+    public InputHandler(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     /**
@@ -18,14 +18,48 @@ public class InputHandler {
      */
     public int getNumber(int radix) {
         while (true) {
+            System.out.print("Введите число: ");
+            String input = scanner.next();
+
             try {
-                System.out.print("Введите число: ");
-                return scanner.nextInt(radix);
-            } catch (InputMismatchException ex) {
-                System.out.println("Ошибка: введите корректное число для системы счисления " + radix);
-                scanner.nextLine(); // Очистка буфера сканера
+                // Проверяем допустимость символов для текущей системы счисления
+                if (isValidForRadix(input, radix)) {
+                    return Integer.parseInt(input, radix);
+                } else {
+                    System.out.println("Ошибка: число содержит недопустимые символы для " + radix + "-ной системы!");
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("Ошибка: введите корректное число!");
             }
         }
+    }
+
+    private boolean isValidForRadix(String number, int radix) {
+        String validChars;
+
+        switch (radix) {
+            case 2:
+                validChars = "01";
+                break;
+            case 8:
+                validChars = "01234567";
+                break;
+            case 10:
+                validChars = "0123456789";
+                break;
+            case 16:
+                validChars = "0123456789ABCDEFabcdef";
+                break;
+            default:
+                return false;
+        }
+
+        for (char c : number.toCharArray()) {
+            if (validChars.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
