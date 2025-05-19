@@ -87,5 +87,5 @@ public class Calc {
                 System.out.println("Hex (16): " + resultH);
         }
     }
-}
 
+}
