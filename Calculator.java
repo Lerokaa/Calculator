@@ -1,9 +1,8 @@
 public class Calculator {
 
-    static Menu menu = new Menu();
+    private static final MenuInterface menu = new Menu();
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         menu.showMenu();
     }
 

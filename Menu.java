@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
-public class Menu {
-
-    private Scanner scanner;
-    private Base currentBase;
-    private Calc calc;
+public class Menu implements MenuInterface {
+    private final Scanner scanner;
+    private final Base currentBase;
+    private final Calc calc;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
@@ -12,14 +11,13 @@ public class Menu {
         this.calc = new Calc(scanner, currentBase);
     }
 
-    public void showMenu()
-    {
+    @Override
+    public void showMenu() {
         System.out.println("Калькулятор");
         System.out.println("Поддерживаемые системы счисления: 2, 8, 10, 16");
         System.out.println("Текущая система счисления: " + currentBase.getRadix());
 
-        while (true)
-        {
+        while (true) {
             printMenu();
             String choice = scanner.nextLine().trim();
 
@@ -40,14 +38,10 @@ public class Menu {
                 default:
                     System.out.println("Неверный выбор. Попробуйте снова.");
             }
-
         }
     }
 
-
-
-
-    public void printMenu() {
+    private void printMenu() {
         System.out.println("\nМеню:");
         System.out.println("1. Сменить систему счисления");
         System.out.println("2. Выполнить вычисления");
