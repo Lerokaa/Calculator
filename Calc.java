@@ -46,27 +46,46 @@ public class Calc {
         return 0;
     }
 
-    public void getResult() {
-        try {
-            InputHandler handler = new InputHandler(scanner);
-            System.out.print("Введите систему счисления (2/8/10/16): ");
-            int radix = Integer.parseInt(scanner.nextLine());
-    
-            int a = handler.getNumber(radix, "Введите первое число: ");
-            String sign = handler.getSign("Введите знак операции (+ - * /): ");
-            int b = handler.getNumber(radix, "Введите второе число: ");
-    
-            int result = solve(a, b, sign);
-    
-            System.out.println("Результат:");
-            System.out.println("2: " + Integer.toBinaryString(result));
-            System.out.println("8: " + Integer.toOctalString(result));
-            System.out.println("10: " + result);
-            System.out.println("16: " + Integer.toHexString(result));
-        } 
-            catch (Exception e) {
-            System.out.println("Ошибка при выполнении операции: " + e.getMessage());
+    public void getResult() throws Exception {
+        result = this.Solve();
+        
+        // Получаем представления результата в разных системах счисления
+        String resultB = Integer.toBinaryString(result);
+        String resultO = Integer.toOctalString(result);
+        String resultH = Integer.toHexString(result);
+        String resultD = Integer.toString(result);
+        
+        // Определяем текущую систему счисления
+        int currentRadix = cBase.getRadix();
+        String currentRadixResult;
+        
+        // Получаем представление результата в текущей системе счисления
+        switch (currentRadix) {
+            case 2:
+                currentRadixResult = resultB;
+                break;
+            case 8:
+                currentRadixResult = resultO;
+                break;
+            case 16:
+                currentRadixResult = resultH;
+                break;
+            default: // Для 10-чной системы и других (если будут добавлены)
+                currentRadixResult = resultD;
+                break;
         }
+        System.out.println("\nРезультат выполнения:");
+        
+        // Сначала выводим в текущей системе счисления
+        System.out.println("В выбранной системе (" + currentRadix + "): " + currentRadixResult);
+        
+        // Затем выводим во всех остальных системах
+        System.out.println("Bin: " + resultB);
+        System.out.println("Oct: " + resultO);
+        System.out.println("Dec: " + resultD);
+        System.out.println("Hex: " + resultH);
     }
+
+
 }
 
